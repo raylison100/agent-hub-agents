@@ -2,7 +2,7 @@
 name: deepseek-dev
 description: Implementacao do dia a dia, escrever funcao, corrigir teste, ajustar endpoint
 provider: deepseek
-model: deepseek-chat
+model: deepseek-v4-flash
 reasoning: medium
 max_output: 8000
 max_steps: 30
@@ -15,8 +15,8 @@ budget:
   run_usd: 0.30
   session_usd: 3.00
 context:
-  window: 128000
-  compact_at: 0.7
+  window: 1000000
+  compact_at: 0.5
   summarizer: local-leitor
 fallback_agent: claude-arquiteto
 repair_attempts: 2

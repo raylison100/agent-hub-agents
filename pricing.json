@@ -2,13 +2,18 @@
   "version": "2026-09-09",
   "currency": "USD",
   "unit": "por milhao de tokens",
+  "notes": [
+    "Anthropic: cache_read e 0.1x da entrada, cache_write e 1.25x. Tabela oficial de 2026-06.",
+    "DeepSeek: valores de horario de pico (01:00-04:00 e 06:00-10:00 UTC, segunda a sexta). Fora do pico a API cobra metade; o ledger registra o pico por seguranca. input e o cache miss, cache_read e o cache hit. Fonte: api-docs.deepseek.com/quick_start/pricing em 2026-09-09."
+  ],
   "models": {
     "anthropic/claude-opus-5": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_write": 6.25 },
     "anthropic/claude-opus-4-8": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_write": 6.25 },
     "anthropic/claude-sonnet-5": { "input": 2.0, "output": 10.0, "cache_read": 0.2, "cache_write": 2.5 },
     "anthropic/claude-haiku-4-5": { "input": 1.0, "output": 5.0, "cache_read": 0.1, "cache_write": 1.25 },
-    "deepseek/deepseek-chat": { "input": null, "output": null, "cache_read": null, "note": "preencher com a tabela vigente em api-docs.deepseek.com" },
-    "deepseek/deepseek-reasoner": { "input": null, "output": null, "cache_read": null, "note": "preencher com a tabela vigente em api-docs.deepseek.com" },
+    "deepseek/deepseek-v4-flash": { "input": 0.44, "output": 1.32, "cache_read": 0.014, "cache_write": 0 },
+    "deepseek/deepseek-v4-pro": { "input": 1.32, "output": 3.96, "cache_read": 0.044, "cache_write": 0 },
+    "deepseek/deepseek-v4-flash-vision-exp": { "input": 0.44, "output": 1.32, "cache_read": 0.014, "cache_write": 0 },
     "openai/*": { "input": null, "output": null, "cache_read": null, "note": "preencher por modelo antes de usar" },
     "ollama/*": { "input": 0, "output": 0, "cache_read": 0, "cache_write": 0 }
   }

@@ -60,8 +60,13 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
 
 ## Antes de usar
 
-- Preencha os precos do DeepSeek em `pricing.json`. O daemon recusa rodar um
-  modelo com preco nulo.
+- `pricing.json` traz Anthropic e DeepSeek V4 preenchidos (DeepSeek em
+  tarifa de pico; fora do pico a API cobra metade). Modelos OpenAI ficam
+  nulos ate voce preencher. O daemon recusa rodar um modelo com preco nulo.
+- No DeepSeek V4, `reasoning: low` desliga o raciocinio; `medium` e `high`
+  ligam com esforco `high`; `max` liga com `max`. O adaptador reenvia o
+  `reasoning_content` nas mensagens seguintes, exigencia da API quando ha
+  ferramentas.
 - Troque o modelo de `local-leitor.md` pelo que sua maquina roda no Ollama.
   O modelo precisa suportar tool calling.
 - `mcp.json` traz um servidor de exemplo apontando para `/tmp`. Substitua
