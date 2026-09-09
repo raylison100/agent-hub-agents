@@ -1,6 +1,8 @@
 ---
 name: revisar-mr
 description: Roteiro para revisar um merge request com foco em defeito, risco e clareza
+activate:
+  intent: revisar
 ---
 
 # Revisar merge request

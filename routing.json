@@ -1,1 +1,12 @@
-[]
+{
+  "intents": {
+    "revisar": ["revisar", "revise", "review", "mr", "merge request", "pull request"],
+    "explicar": ["explica", "explique", "o que faz", "como funciona", "resuma", "resumo"],
+    "implementar": ["implementa", "implemente", "cria", "crie", "corrige", "corrija", "ajusta", "ajuste"]
+  },
+  "rules": [
+    { "when": { "intent": "revisar" }, "agent": "claude-arquiteto" },
+    { "when": { "intent": "explicar", "prompt_tokens_lt": 200 }, "agent": "local-leitor" },
+    { "when": { "intent": "implementar" }, "agent": "deepseek-dev" }
+  ]
+}
