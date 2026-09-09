@@ -21,9 +21,42 @@ policies/
   budgets.json          teto global mensal e teto diario por agente
   secrets.json          padroes de segredo para redacao de saida
 pricing.json            precos por milhao de tokens, versionado
-mcp.json                servidores MCP e classificacao de risco
-routing.json            regras de roteamento (vazio ate a fase 4)
+mcp.json                servidores MCP (stdio ou HTTP) e classificacao de risco
+routing.json            intencoes por palavra chave e regras de roteamento
+hooks.json              hooks de ciclo de vida no formato proprio
+plugins.json            plugins no layout do Claude Code, por caminho local
+overrides.json          provedor, modelo e contexto para agentes vindos de plugin
+webhooks.json           webhooks de saida no formato Standard Webhooks
+schedules/*.json        agendamentos por cron (opcional)
+triggers/*.json         gatilhos externos (opcional)
 ```
+
+## Plugins do Claude Code
+
+Aponte `plugins.json` para a pasta de um plugin instalado, por exemplo
+`~/.claude/plugins/marketplaces/<nome>/plugins/<plugin>`. O daemon le
+`skills/`, `commands/`, `agents/`, `.mcp.json` e `hooks/hooks.json`, tudo
+com prefixo do nome do plugin. Agentes de plugin nao trazem provedor nem
+modelo: `overrides.json` decide, por plugin (`"meu-plugin"`), por agente
+(`"meu-plugin/revisor"`) ou pelo padrao (`"default"`).
+
+## Hooks
+
+`hooks.json` no formato proprio:
+
+```json
+{
+  "hooks": [
+    { "event": "tool.before", "command": "node gates/segredo.js", "match": { "tool": "git|write_file" }, "timeout_ms": 10000 }
+  ]
+}
+```
+
+O hook recebe JSON na entrada padrao e responde com
+`{ "decision": "allow" | "deny", "reason": "...", "output": "..." }`.
+Saida diferente de zero nega. Hooks de plugin no formato do Claude Code
+sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
+`UserPromptSubmit`; codigo de saida 2 nega).
 
 ## Antes de usar
 
