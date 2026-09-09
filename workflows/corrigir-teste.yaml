@@ -1,0 +1,45 @@
+name: corrigir-teste
+description: Roda um teste, diagnostica a falha com o agente local e corrige com o deepseek-dev, validando de novo ate duas vezes
+inputs: [test_command]
+mode: normal
+budget_usd: 1.0
+steps:
+  - id: rodar
+    tool: run_command
+    args:
+      command: "{{test_command}}"
+
+  - id: diagnosticar
+    agent: local-leitor
+    prompt: |
+      O comando `{{test_command}}` terminou com exit_code {{rodar.exit_code}}.
+      Saida:
+      {{rodar.output}}
+
+      Se exit_code for 0, responda {"cause": "nenhuma", "files": []}.
+      Caso contrario, explique a causa provavel em uma frase e liste os arquivos a investigar.
+    output_schema:
+      type: object
+      properties:
+        cause: { type: string }
+        files: { type: array, items: { type: string } }
+      required: [cause, files]
+
+  - id: corrigir
+    agent: deepseek-dev
+    tools: [read_file, search, edit_file]
+    prompt: |
+      Corrija a causa a seguir sem alterar o comportamento esperado pelo teste.
+      Causa: {{diagnosticar.cause}}
+      Arquivos: {{diagnosticar.files}}
+      Comando de teste: {{test_command}}
+      Ao terminar, liste os arquivos alterados.
+
+  - id: validar
+    tool: run_command
+    args:
+      command: "{{test_command}}"
+    retry:
+      step: corrigir
+      max: 2
+      when: "exit_code != 0"
