@@ -12,6 +12,7 @@ Formato em `../docs/07-agentes.md`, extensoes em `../docs/09-extensoes.md`.
 profiles/               um Markdown com frontmatter por agente
   claude-arquiteto.md
   deepseek-dev.md
+  openai-dev.md
   local-leitor.md
 skills/                 uma pasta por skill, formato Agent Skills
   revisar-mr/SKILL.md
@@ -81,4 +82,5 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
 |----------|--------|
 | `ANTHROPIC_API_KEY` | claude-arquiteto |
 | `DEEPSEEK_API_KEY` | deepseek-dev |
+| `OPENAI_API_KEY` | openai-dev |
 | nenhuma | local-leitor (Ollama local) |
