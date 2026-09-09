@@ -4,6 +4,7 @@
     "explicar": ["explica", "explique", "o que faz", "como funciona", "resuma", "resumo"],
     "implementar": ["implementa", "implemente", "cria", "crie", "corrige", "corrija", "ajusta", "ajuste"]
   },
+  "classifier": { "agent": "local-leitor", "max_prompt_chars": 2000 },
   "rules": [
     { "when": { "intent": "revisar" }, "agent": "claude-arquiteto" },
     { "when": { "intent": "explicar", "prompt_tokens_lt": 200 }, "agent": "local-leitor" },
