@@ -60,9 +60,11 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
 
 ## Antes de usar
 
-- `pricing.json` traz Anthropic e DeepSeek V4 preenchidos (DeepSeek em
-  tarifa de pico; fora do pico a API cobra metade). Modelos OpenAI ficam
-  nulos ate voce preencher. O daemon recusa rodar um modelo com preco nulo.
+- `pricing.json` traz Anthropic, DeepSeek V4 (tarifa de pico; fora do pico
+  a API cobra metade) e os principais modelos OpenAI em tarifa Standard:
+  `gpt-6-astra`, `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`, `gpt-5.5`,
+  `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.4-nano` e `gpt-5.3-codex`. Modelo fora
+  da lista bloqueia o run ate ser cadastrado, de proposito.
 - No DeepSeek V4, `reasoning: low` desliga o raciocinio; `medium` e `high`
   ligam com esforco `high`; `max` liga com `max`. O adaptador reenvia o
   `reasoning_content` nas mensagens seguintes, exigencia da API quando ha
