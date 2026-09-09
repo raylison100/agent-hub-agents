@@ -1,0 +1,5 @@
+{
+  "read": "allow",
+  "write": "deny",
+  "exec": "deny"
+}

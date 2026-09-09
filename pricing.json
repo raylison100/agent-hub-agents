@@ -1,0 +1,15 @@
+{
+  "version": "2026-09-09",
+  "currency": "USD",
+  "unit": "por milhao de tokens",
+  "models": {
+    "anthropic/claude-opus-5": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_write": 6.25 },
+    "anthropic/claude-opus-4-8": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_write": 6.25 },
+    "anthropic/claude-sonnet-5": { "input": 2.0, "output": 10.0, "cache_read": 0.2, "cache_write": 2.5 },
+    "anthropic/claude-haiku-4-5": { "input": 1.0, "output": 5.0, "cache_read": 0.1, "cache_write": 1.25 },
+    "deepseek/deepseek-chat": { "input": null, "output": null, "cache_read": null, "note": "preencher com a tabela vigente em api-docs.deepseek.com" },
+    "deepseek/deepseek-reasoner": { "input": null, "output": null, "cache_read": null, "note": "preencher com a tabela vigente em api-docs.deepseek.com" },
+    "openai/*": { "input": null, "output": null, "cache_read": null, "note": "preencher por modelo antes de usar" },
+    "ollama/*": { "input": 0, "output": 0, "cache_read": 0, "cache_write": 0 }
+  }
+}

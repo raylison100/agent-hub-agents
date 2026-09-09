@@ -1,0 +1,9 @@
+{
+  "global_month_usd": 100,
+  "automation_month_usd": 30,
+  "agents": {
+    "claude-arquiteto": { "day_usd": 20 },
+    "deepseek-dev": { "day_usd": 5 },
+    "local-leitor": { "day_usd": 0 }
+  }
+}
