@@ -1,0 +1,13 @@
+{
+  "id": "revisao-precos",
+  "cron": "0 9 1 * *",
+  "timezone": "America/Sao_Paulo",
+  "agent": "local-leitor",
+  "workspace": "/home/usuario/Projects/agent-hub",
+  "prompt": "Revisao mensal da tabela de precos. Leia o arquivo agents/pricing.json deste workspace e produza um relatorio em portugues com: 1) o campo version e ha quantos dias ele esta; 2) uma tabela por provedor com cada modelo e seus precos de input e output; 3) as fontes citadas no campo notes, uma por linha, como checklist do que o usuario deve conferir manualmente no site de cada provedor (Anthropic, DeepSeek incluindo as janelas de pico do bloco time_discounts, Gemini e OpenAI); 4) um lembrete final: apos conferir, atualizar os valores que mudaram e gravar a data do dia no campo version. Nao invente precos novos; o relatorio e so leitura e checklist.",
+  "mode": "draft",
+  "budget": { "run_usd": 0.01, "day_usd": 0.05 },
+  "overlap": "skip",
+  "missed": "run_once",
+  "enabled": true
+}
