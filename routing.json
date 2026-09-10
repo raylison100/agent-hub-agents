@@ -48,9 +48,10 @@
   },
   "default_agent": "gemini-dev",
   "prompt_improver": {
-    "agent": "gemini-dev",
+    "agent": "local-leitor",
     "min_chars": 12,
-    "max_output": 1200
+    "max_output": 700,
+    "timeout_ms": 60000
   },
   "scoring": {
     "cost_weight": 0.5,

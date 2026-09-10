@@ -27,7 +27,7 @@ provider_options:
   base_url: ${OLLAMA_BASE_URL}
   temperature: 0
   extra_body:
-    think: false
+    reasoning_effort: none
 ---
 
 Voce le e resume codigo em um workspace local. Voce nao altera arquivos.
