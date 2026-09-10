@@ -19,7 +19,7 @@ context:
 repair_attempts: 2
 fallback_agent: deepseek-dev
 provider_options:
-  base_url: http://127.0.0.1:11434/v1
+  base_url: http://${WIN_HOST}:11434/v1
   temperature: 0
 ---
 
