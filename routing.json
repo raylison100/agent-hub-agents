@@ -1,18 +1,74 @@
 {
   "intents": {
-    "revisar": ["revisar", "revise", "review", "mr", "merge request", "pull request"],
-    "explicar": ["explica", "explique", "o que faz", "como funciona", "resuma", "resumo", "liste", "lista"],
-    "implementar": ["implementa", "implemente", "cria", "crie", "corrige", "corrija", "ajusta", "ajuste", "refatora", "refatore", "adiciona", "adicione"],
-    "arquitetura": ["arquitetura", "desenho", "design", "decisao", "trade-off", "migracao", "estrategia"]
+    "revisar": [
+      "revisar",
+      "revise",
+      "review",
+      "mr",
+      "merge request",
+      "pull request"
+    ],
+    "explicar": [
+      "explica",
+      "explique",
+      "o que faz",
+      "como funciona",
+      "resuma",
+      "resumo",
+      "liste",
+      "lista"
+    ],
+    "implementar": [
+      "implementa",
+      "implemente",
+      "cria",
+      "crie",
+      "corrige",
+      "corrija",
+      "ajusta",
+      "ajuste",
+      "refatora",
+      "refatore",
+      "adiciona",
+      "adicione"
+    ],
+    "arquitetura": [
+      "arquitetura",
+      "desenho",
+      "design",
+      "decisao",
+      "trade-off",
+      "migracao",
+      "estrategia"
+    ]
   },
-  "classifier": { "agent": "gemini-dev", "max_prompt_chars": 2000 },
+  "classifier": {
+    "agent": "gemini-dev",
+    "max_prompt_chars": 2000
+  },
   "default_agent": "gemini-dev",
-  "prompt_improver": { "agent": "gemini-dev", "min_chars": 12, "max_output": 1200 },
+  "prompt_improver": {
+    "agent": "gemini-dev",
+    "min_chars": 12,
+    "max_output": 1200
+  },
+  "scoring": {
+    "cost_weight": 0.5,
+    "min_capability": 0.4,
+    "context_margin": 1.5
+  },
   "rules": [
-    { "when": { "intent": "arquitetura" }, "agent": "claude-arquiteto" },
-    { "when": { "intent": "revisar" }, "agent": "claude-arquiteto" },
-    { "when": { "intent": "explicar", "prompt_tokens_lt": 120 }, "agent": "local-leitor" },
-    { "when": { "intent": "implementar", "prompt_tokens_gt": 400 }, "agent": "openai-dev" },
-    { "when": { "intent": "implementar" }, "agent": "deepseek-dev" }
+    {
+      "when": {
+        "intent": "arquitetura"
+      },
+      "agent": "claude-arquiteto"
+    },
+    {
+      "when": {
+        "intent": "revisar"
+      },
+      "agent": "claude-arquiteto"
+    }
   ]
 }

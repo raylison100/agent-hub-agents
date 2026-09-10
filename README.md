@@ -24,7 +24,7 @@ policies/
   secrets.json          padroes de segredo para redacao de saida
 pricing.json            precos por milhao de tokens, versionado
 mcp.json                servidores MCP (stdio ou HTTP) e classificacao de risco
-routing.json            intencoes por palavra chave e regras de roteamento
+routing.json            intencoes, regras, classificador, melhorador de prompt e pontuacao custo x capacidade
 hooks.json              hooks de ciclo de vida no formato proprio
 plugins.json            plugins no layout do Claude Code, por caminho local
 overrides.json          provedor, modelo e contexto para agentes vindos de plugin

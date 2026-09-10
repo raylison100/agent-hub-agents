@@ -10,6 +10,11 @@ tools:
   native: [list_dir, read_file, search]
   mcp: []
 skills: []
+routing:
+  capabilities:
+    "*": 0.35
+    explicar: 0.65
+  max_prompt_tokens: 2500
 policy: somente-leitura
 budget:
   run_usd: 0

@@ -10,6 +10,13 @@ tools:
   native: [list_dir, read_file, search, edit_file, write_file, run_command, git]
   mcp: []
 skills: [revisar-mr]
+routing:
+  capabilities:
+    "*": 0.85
+    arquitetura: 0.95
+    revisar: 0.9
+    implementar: 0.85
+    explicar: 0.8
 policy: padrao
 budget:
   run_usd: 2.00
