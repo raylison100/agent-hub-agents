@@ -2,7 +2,7 @@
 name: local-leitor
 description: Leitura, busca, resumo e classificacao com modelo local. Custo zero por token
 provider: ollama
-model: llama3.2:3b
+model: qwen3:8b
 reasoning: low
 max_output: 4000
 max_steps: 15
@@ -14,13 +14,15 @@ policy: somente-leitura
 budget:
   run_usd: 0
 context:
-  window: 32768
+  window: 16384
   compact_at: 0.8
 repair_attempts: 2
 fallback_agent: deepseek-dev
 provider_options:
   base_url: ${OLLAMA_BASE_URL}
   temperature: 0
+  extra_body:
+    think: false
 ---
 
 Voce le e resume codigo em um workspace local. Voce nao altera arquivos.
