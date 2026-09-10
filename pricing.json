@@ -4,35 +4,178 @@
   "unit": "por milhao de tokens",
   "notes": [
     "Anthropic: cache_read e 0.1x da entrada, cache_write e 1.25x. Tabela oficial de 2026-06.",
-    "DeepSeek: valores de horario de pico (01:00-04:00 e 06:00-10:00 UTC, segunda a sexta). Fora do pico a API cobra metade; o ledger registra o pico por seguranca. input e o cache miss, cache_read e o cache hit. Fonte: api-docs.deepseek.com/quick_start/pricing em 2026-09-09.",
+    "DeepSeek: valores de horario de pico (01:00-04:00 e 06:00-10:00 UTC, segunda a sexta). Fora do pico a API cobra metade; o bloco time_discounts aplica o multiplicador 0.5 e o ledger registra o preco do instante da chamada. input e o cache miss, cache_read e o cache hit. Fonte: api-docs.deepseek.com/quick_start/pricing em 2026-09-09.",
     "Gemini: nivel pago, faixa de prompt ate 200k tokens; acima disso o Pro cobra o dobro na entrada e mais na saida, por isso os perfis limitam a janela a 200k. Flash 3.7 e 3.8 dobram de preco em 2027-01-01. Tokens de raciocinio contam como saida. Fonte: ai.google.dev/gemini-api/docs/pricing em 2026-09-09.",
     "OpenAI: tarifa Standard (nao Batch, Flex ou Fast). Modelos principais em 2026-09-09: gpt-6-astra (topo), gpt-5.6-sol e terra (uso geral), gpt-5.6-luna e gpt-5.4-nano (baratos), gpt-5.3-codex (codigo). Fonte: developers.openai.com/api/docs/pricing. Modelo fora da lista bloqueia o run ate ser cadastrado."
   ],
+  "time_discounts": {
+    "deepseek/*": {
+      "multiplier": 0.5,
+      "peak_utc": {
+        "weekdays_only": true,
+        "ranges": [
+          [
+            "01:00",
+            "04:00"
+          ],
+          [
+            "06:00",
+            "10:00"
+          ]
+        ]
+      }
+    }
+  },
   "models": {
-    "anthropic/claude-opus-5": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_write": 6.25 },
-    "anthropic/claude-opus-4-8": { "input": 5.0, "output": 25.0, "cache_read": 0.5, "cache_write": 6.25 },
-    "anthropic/claude-sonnet-5": { "input": 2.0, "output": 10.0, "cache_read": 0.2, "cache_write": 2.5 },
-    "anthropic/claude-haiku-4-5": { "input": 1.0, "output": 5.0, "cache_read": 0.1, "cache_write": 1.25 },
-    "deepseek/deepseek-v4-flash": { "input": 0.44, "output": 1.32, "cache_read": 0.014, "cache_write": 0 },
-    "deepseek/deepseek-v4-pro": { "input": 1.32, "output": 3.96, "cache_read": 0.044, "cache_write": 0 },
-    "deepseek/deepseek-v4-flash-vision-exp": { "input": 0.44, "output": 1.32, "cache_read": 0.014, "cache_write": 0 },
-    "openai/gpt-6-astra": { "input": 10.0, "output": 50.0, "cache_read": 1.0, "cache_write": 0 },
-    "openai/gpt-5.6-sol": { "input": 4.0, "output": 20.0, "cache_read": 0.4, "cache_write": 0 },
-    "openai/gpt-5.6-terra": { "input": 2.0, "output": 12.0, "cache_read": 0.2, "cache_write": 0 },
-    "openai/gpt-5.6-luna": { "input": 0.2, "output": 1.2, "cache_read": 0.02, "cache_write": 0 },
-    "openai/gpt-5.5": { "input": 5.0, "output": 30.0, "cache_read": 0.5, "cache_write": 0 },
-    "openai/gpt-5.4": { "input": 2.5, "output": 15.0, "cache_read": 0.25, "cache_write": 0 },
-    "openai/gpt-5.4-mini": { "input": 0.75, "output": 4.5, "cache_read": 0.075, "cache_write": 0 },
-    "openai/gpt-5.4-nano": { "input": 0.2, "output": 1.25, "cache_read": 0.02, "cache_write": 0 },
-    "openai/gpt-5.3-codex": { "input": 1.75, "output": 14.0, "cache_read": 0.175, "cache_write": 0 },
-    "gemini/gemini-3.1-pro-preview": { "input": 2.0, "output": 12.0, "cache_read": 0.2, "cache_write": 0 },
-    "gemini/gemini-2.5-pro": { "input": 1.25, "output": 10.0, "cache_read": 0.125, "cache_write": 0 },
-    "gemini/gemini-3.8-flash": { "input": 0.75, "output": 3.75, "cache_read": 0.075, "cache_write": 0 },
-    "gemini/gemini-3.7-flash": { "input": 0.75, "output": 3.75, "cache_read": 0.075, "cache_write": 0 },
-    "gemini/gemini-2.5-flash": { "input": 0.3, "output": 2.5, "cache_read": 0.03, "cache_write": 0 },
-    "gemini/gemini-3.5-flash-lite": { "input": 0.3, "output": 2.5, "cache_read": 0.03, "cache_write": 0 },
-    "gemini/gemini-3.1-flash-lite": { "input": 0.25, "output": 1.5, "cache_read": 0.025, "cache_write": 0 },
-    "gemini/gemini-2.5-flash-lite": { "input": 0.1, "output": 0.4, "cache_read": 0.01, "cache_write": 0 },
-    "ollama/*": { "input": 0, "output": 0, "cache_read": 0, "cache_write": 0 }
+    "anthropic/claude-opus-5": {
+      "input": 5.0,
+      "output": 25.0,
+      "cache_read": 0.5,
+      "cache_write": 6.25
+    },
+    "anthropic/claude-opus-4-8": {
+      "input": 5.0,
+      "output": 25.0,
+      "cache_read": 0.5,
+      "cache_write": 6.25
+    },
+    "anthropic/claude-sonnet-5": {
+      "input": 2.0,
+      "output": 10.0,
+      "cache_read": 0.2,
+      "cache_write": 2.5
+    },
+    "anthropic/claude-haiku-4-5": {
+      "input": 1.0,
+      "output": 5.0,
+      "cache_read": 0.1,
+      "cache_write": 1.25
+    },
+    "deepseek/deepseek-v4-flash": {
+      "input": 0.44,
+      "output": 1.32,
+      "cache_read": 0.014,
+      "cache_write": 0
+    },
+    "deepseek/deepseek-v4-pro": {
+      "input": 1.32,
+      "output": 3.96,
+      "cache_read": 0.044,
+      "cache_write": 0
+    },
+    "deepseek/deepseek-v4-flash-vision-exp": {
+      "input": 0.44,
+      "output": 1.32,
+      "cache_read": 0.014,
+      "cache_write": 0
+    },
+    "openai/gpt-6-astra": {
+      "input": 10.0,
+      "output": 50.0,
+      "cache_read": 1.0,
+      "cache_write": 0
+    },
+    "openai/gpt-5.6-sol": {
+      "input": 4.0,
+      "output": 20.0,
+      "cache_read": 0.4,
+      "cache_write": 0
+    },
+    "openai/gpt-5.6-terra": {
+      "input": 2.0,
+      "output": 12.0,
+      "cache_read": 0.2,
+      "cache_write": 0
+    },
+    "openai/gpt-5.6-luna": {
+      "input": 0.2,
+      "output": 1.2,
+      "cache_read": 0.02,
+      "cache_write": 0
+    },
+    "openai/gpt-5.5": {
+      "input": 5.0,
+      "output": 30.0,
+      "cache_read": 0.5,
+      "cache_write": 0
+    },
+    "openai/gpt-5.4": {
+      "input": 2.5,
+      "output": 15.0,
+      "cache_read": 0.25,
+      "cache_write": 0
+    },
+    "openai/gpt-5.4-mini": {
+      "input": 0.75,
+      "output": 4.5,
+      "cache_read": 0.075,
+      "cache_write": 0
+    },
+    "openai/gpt-5.4-nano": {
+      "input": 0.2,
+      "output": 1.25,
+      "cache_read": 0.02,
+      "cache_write": 0
+    },
+    "openai/gpt-5.3-codex": {
+      "input": 1.75,
+      "output": 14.0,
+      "cache_read": 0.175,
+      "cache_write": 0
+    },
+    "gemini/gemini-3.1-pro-preview": {
+      "input": 2.0,
+      "output": 12.0,
+      "cache_read": 0.2,
+      "cache_write": 0
+    },
+    "gemini/gemini-2.5-pro": {
+      "input": 1.25,
+      "output": 10.0,
+      "cache_read": 0.125,
+      "cache_write": 0
+    },
+    "gemini/gemini-3.8-flash": {
+      "input": 0.75,
+      "output": 3.75,
+      "cache_read": 0.075,
+      "cache_write": 0
+    },
+    "gemini/gemini-3.7-flash": {
+      "input": 0.75,
+      "output": 3.75,
+      "cache_read": 0.075,
+      "cache_write": 0
+    },
+    "gemini/gemini-2.5-flash": {
+      "input": 0.3,
+      "output": 2.5,
+      "cache_read": 0.03,
+      "cache_write": 0
+    },
+    "gemini/gemini-3.5-flash-lite": {
+      "input": 0.3,
+      "output": 2.5,
+      "cache_read": 0.03,
+      "cache_write": 0
+    },
+    "gemini/gemini-3.1-flash-lite": {
+      "input": 0.25,
+      "output": 1.5,
+      "cache_read": 0.025,
+      "cache_write": 0
+    },
+    "gemini/gemini-2.5-flash-lite": {
+      "input": 0.1,
+      "output": 0.4,
+      "cache_read": 0.01,
+      "cache_write": 0
+    },
+    "ollama/*": {
+      "input": 0,
+      "output": 0,
+      "cache_read": 0,
+      "cache_write": 0
+    }
   }
 }
