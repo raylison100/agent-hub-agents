@@ -14,7 +14,7 @@ policy: somente-leitura
 budget:
   run_usd: 0
 context:
-  window: 16384
+  window: 8192
   compact_at: 0.8
 repair_attempts: 2
 fallback_agent: deepseek-dev
