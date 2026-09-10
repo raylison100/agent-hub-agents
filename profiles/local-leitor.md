@@ -8,7 +8,7 @@ max_output: 4000
 max_steps: 15
 tools:
   native: [list_dir, read_file, search]
-  mcp: []
+  mcp: [jira]
 skills: []
 routing:
   capabilities:

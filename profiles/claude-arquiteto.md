@@ -8,7 +8,7 @@ max_output: 32000
 max_steps: 40
 tools:
   native: [list_dir, read_file, search, edit_file, write_file, run_command, git]
-  mcp: []
+  mcp: [jira]
 skills: [revisar-mr]
 routing:
   vision: true
