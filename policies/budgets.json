@@ -5,6 +5,7 @@
     "claude-arquiteto": { "day_usd": 20 },
     "deepseek-dev": { "day_usd": 5 },
     "openai-dev": { "day_usd": 10 },
+    "gemini-dev": { "day_usd": 8 },
     "local-leitor": { "day_usd": 0 }
   }
 }

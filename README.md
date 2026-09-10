@@ -13,6 +13,7 @@ profiles/               um Markdown com frontmatter por agente
   claude-arquiteto.md
   deepseek-dev.md
   openai-dev.md
+  gemini-dev.md
   local-leitor.md
 skills/                 uma pasta por skill, formato Agent Skills
   revisar-mr/SKILL.md
@@ -83,4 +84,5 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
 | `ANTHROPIC_API_KEY` | claude-arquiteto |
 | `DEEPSEEK_API_KEY` | deepseek-dev |
 | `OPENAI_API_KEY` | openai-dev |
+| `GEMINI_API_KEY` | gemini-dev |
 | nenhuma | local-leitor (Ollama local) |
