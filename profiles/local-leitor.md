@@ -2,7 +2,7 @@
 name: local-leitor
 description: Leitura, busca, resumo e classificacao com modelo local. Custo zero por token
 provider: ollama
-model: qwen3:14b
+model: llama3.2:3b
 reasoning: low
 max_output: 4000
 max_steps: 15
@@ -19,7 +19,7 @@ context:
 repair_attempts: 2
 fallback_agent: deepseek-dev
 provider_options:
-  base_url: http://${WIN_HOST}:11434/v1
+  base_url: ${OLLAMA_BASE_URL}
   temperature: 0
 ---
 
