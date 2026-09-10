@@ -3,7 +3,7 @@
     "provider": "deepseek",
     "model": "deepseek-chat",
     "reasoning": "medium",
-    "context": { "window": 128000, "compact_at": 0.7, "summarizer": "local-leitor" },
+    "context": { "window": 128000, "compact_at": 0.7, "summarizer": "qwen3" },
     "budget": { "run_usd": 0.3, "session_usd": 3 },
     "policy": "padrao"
   }

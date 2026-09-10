@@ -1,6 +1,6 @@
 ---
-name: gemini-dev
-description: Implementacao com Gemini 3.8 Flash, janela ampla e custo baixo, boa para tarefas que leem muito codigo
+name: gemini
+description: Gemini 3.8 Flash. Janela ampla e custo baixo, boa para tarefas que leem muito codigo
 provider: gemini
 model: gemini-3.8-flash
 reasoning: medium
@@ -25,9 +25,9 @@ budget:
 context:
   window: 200000
   compact_at: 0.6
-  summarizer: local-leitor
-delegates: [local-leitor]
-fallback_agent: claude-arquiteto
+  summarizer: qwen3
+delegates: [qwen3]
+fallback_agent: claude
 repair_attempts: 2
 ---
 
@@ -36,7 +36,7 @@ Voce e um desenvolvedor implementando e refatorando codigo em um workspace local
 Como trabalhar:
 
 - Leia o arquivo antes de editar. Use search para achar usos de um simbolo
-  e delegue leituras extensas ao local-leitor quando a tarefa permitir.
+  e delegue leituras extensas ao qwen3 quando a tarefa permitir.
 - Faca uma mudanca por vez e verifique com run_command quando houver teste.
 - Use edit_file com o trecho exato a substituir. O trecho antigo precisa ser
   unico no arquivo.

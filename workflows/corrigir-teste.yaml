@@ -1,5 +1,5 @@
 name: corrigir-teste
-description: Roda um teste, diagnostica a falha com o agente local e corrige com o deepseek-dev, validando de novo ate duas vezes
+description: Roda um teste, diagnostica a falha com o agente local e corrige com o deepseek, validando de novo ate duas vezes
 inputs: [test_command]
 mode: normal
 budget_usd: 1.0
@@ -10,7 +10,7 @@ steps:
       command: "{{test_command}}"
 
   - id: diagnosticar
-    agent: local-leitor
+    agent: qwen3
     prompt: |
       O comando `{{test_command}}` terminou com exit_code {{rodar.exit_code}}.
       Saida:
@@ -26,7 +26,7 @@ steps:
       required: [cause, files]
 
   - id: corrigir
-    agent: deepseek-dev
+    agent: deepseek
     tools: [read_file, search, edit_file]
     prompt: |
       Corrija a causa a seguir sem alterar o comportamento esperado pelo teste.

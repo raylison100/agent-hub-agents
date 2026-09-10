@@ -1,6 +1,6 @@
 ---
-name: claude-arquiteto
-description: Desenho de solucao, revisao de MR, refatoracao que cruza modulos e decisoes de arquitetura
+name: claude
+description: Claude Opus 5. Desenho de solucao, revisao de MR, refatoracao que cruza modulos e decisoes de arquitetura
 provider: anthropic
 model: claude-opus-5
 reasoning: high
@@ -25,8 +25,8 @@ budget:
 context:
   window: 1000000
   compact_at: 0.5
-  summarizer: local-leitor
-delegates: [local-leitor]
+  summarizer: qwen3
+delegates: [qwen3]
 cache:
   system_ttl: 1h
 ---

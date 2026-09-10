@@ -2,10 +2,10 @@
   "global_month_usd": 100,
   "automation_month_usd": 30,
   "agents": {
-    "claude-arquiteto": { "day_usd": 20 },
-    "deepseek-dev": { "day_usd": 5 },
-    "openai-dev": { "day_usd": 10 },
-    "gemini-dev": { "day_usd": 8 },
-    "local-leitor": { "day_usd": 0 }
+    "claude": { "day_usd": 20 },
+    "deepseek": { "day_usd": 5 },
+    "openai": { "day_usd": 10 },
+    "gemini": { "day_usd": 8 },
+    "qwen3": { "day_usd": 0 }
   }
 }

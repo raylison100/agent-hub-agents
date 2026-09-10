@@ -10,11 +10,11 @@ Formato em `../docs/07-agentes.md`, extensoes em `../docs/09-extensoes.md`.
 
 ```
 profiles/               um Markdown com frontmatter por agente
-  claude-arquiteto.md
-  deepseek-dev.md
-  openai-dev.md            (usa a Responses API por padrao; `provider_options.api: chat` volta ao chat completions)
-  gemini-dev.md
-  local-leitor.md
+  claude.md
+  deepseek.md
+  openai.md            (usa a Responses API por padrao; `provider_options.api: chat` volta ao chat completions)
+  gemini.md
+  qwen3.md
 skills/                 uma pasta por skill, formato Agent Skills
   revisar-mr/SKILL.md
 policies/
@@ -71,7 +71,7 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
   ligam com esforco `high`; `max` liga com `max`. O adaptador reenvia o
   `reasoning_content` nas mensagens seguintes, exigencia da API quando ha
   ferramentas.
-- Troque o modelo de `local-leitor.md` pelo que sua maquina roda no Ollama.
+- Troque o modelo de `qwen3.md` pelo que sua maquina roda no Ollama.
   O modelo precisa suportar tool calling.
 - `mcp.json` traz um servidor de exemplo apontando para `/tmp`. Substitua
   pelos seus. Segredos entram por nome de variavel de ambiente com `$`,
@@ -81,8 +81,8 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
 
 | Variavel | Perfil |
 |----------|--------|
-| `ANTHROPIC_API_KEY` | claude-arquiteto |
-| `DEEPSEEK_API_KEY` | deepseek-dev |
-| `OPENAI_API_KEY` | openai-dev |
-| `GEMINI_API_KEY` | gemini-dev |
-| nenhuma | local-leitor (Ollama local) |
+| `ANTHROPIC_API_KEY` | claude |
+| `DEEPSEEK_API_KEY` | deepseek |
+| `OPENAI_API_KEY` | openai |
+| `GEMINI_API_KEY` | gemini |
+| nenhuma | qwen3 (Ollama local) |

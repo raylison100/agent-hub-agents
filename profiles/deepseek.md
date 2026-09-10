@@ -1,6 +1,6 @@
 ---
-name: deepseek-dev
-description: Implementacao do dia a dia, escrever funcao, corrigir teste, ajustar endpoint
+name: deepseek
+description: DeepSeek V4 Flash. Implementacao do dia a dia, escrever funcao, corrigir teste, ajustar endpoint
 provider: deepseek
 model: deepseek-v4-flash
 reasoning: medium
@@ -23,8 +23,8 @@ budget:
 context:
   window: 1000000
   compact_at: 0.5
-  summarizer: local-leitor
-fallback_agent: claude-arquiteto
+  summarizer: qwen3
+fallback_agent: claude
 repair_attempts: 2
 provider_options:
   base_url: https://api.deepseek.com

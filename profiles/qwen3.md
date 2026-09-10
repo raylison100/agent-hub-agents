@@ -1,6 +1,6 @@
 ---
-name: local-leitor
-description: Leitura, busca, resumo e classificacao com modelo local. Custo zero por token
+name: qwen3
+description: Modelo local Qwen3 8B no Ollama. Leitura, busca, resumo e classificacao com custo zero por token
 provider: ollama
 model: qwen3:8b
 reasoning: low
@@ -22,7 +22,7 @@ context:
   window: 8192
   compact_at: 0.8
 repair_attempts: 2
-fallback_agent: deepseek-dev
+fallback_agent: deepseek
 provider_options:
   base_url: ${OLLAMA_BASE_URL}
   temperature: 0

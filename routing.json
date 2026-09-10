@@ -43,12 +43,12 @@
     ]
   },
   "classifier": {
-    "agent": "gemini-dev",
+    "agent": "gemini",
     "max_prompt_chars": 2000
   },
-  "default_agent": "gemini-dev",
+  "default_agent": "gemini",
   "prompt_improver": {
-    "agent": "local-leitor",
+    "agent": "qwen3",
     "min_chars": 12,
     "max_output": 700,
     "timeout_ms": 60000
@@ -63,13 +63,13 @@
       "when": {
         "intent": "arquitetura"
       },
-      "agent": "claude-arquiteto"
+      "agent": "claude"
     },
     {
       "when": {
         "intent": "revisar"
       },
-      "agent": "claude-arquiteto"
+      "agent": "claude"
     }
   ]
 }
