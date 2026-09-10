@@ -11,6 +11,7 @@ tools:
   mcp: []
 skills: [revisar-mr]
 routing:
+  vision: true
   capabilities:
     "*": 0.85
     arquitetura: 0.95
