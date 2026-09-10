@@ -12,7 +12,7 @@ Formato em `../docs/07-agentes.md`, extensoes em `../docs/09-extensoes.md`.
 profiles/               um Markdown com frontmatter por agente
   claude-arquiteto.md
   deepseek-dev.md
-  openai-dev.md
+  openai-dev.md            (usa a Responses API por padrao; `provider_options.api: chat` volta ao chat completions)
   gemini-dev.md
   local-leitor.md
 skills/                 uma pasta por skill, formato Agent Skills
