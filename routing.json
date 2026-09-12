@@ -55,6 +55,8 @@
   },
   "scoring": {
     "cost_weight": 0.5,
+    "context_weight": 0.2,
+    "expected_output_tokens": 1200,
     "min_capability": 0.4,
     "context_margin": 1.5
   },
