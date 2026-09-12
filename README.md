@@ -116,3 +116,16 @@ projeto. O agendamento `revisao-memoria` audita a memoria todo mes.
 Versionar ou nao: `specs/` e `decisions/` sao documentacao do projeto e valem
 commit; `memory/` depende do time. Para deixar tudo fora do git, acrescente
 `.agent-hub/` ao `.gitignore` do seu projeto.
+
+## Base de conhecimento e glossario
+
+`.agent-hub/knowledge/` guarda o material do projeto: processo do time,
+transcricoes, notas. O daemon indexa em FTS5 dentro do proprio SQLite, so o que
+mudou desde a ultima vez, sem embedding e sem custo. Le `.md`, `.txt`, `.csv`,
+`.json` e `.yaml`; outros formatos aparecem como ignorados (PDF precisa ser
+convertido antes).
+
+Os agentes buscam com `knowledge_search`, que devolve cada trecho com a citacao
+`[arquivo:linha]` pronta, e a descricao da ferramenta cobra a citacao na
+resposta. `.agent-hub/glossario.md` e carregado sempre, para os agentes usarem
+as palavras do time.

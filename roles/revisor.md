@@ -3,7 +3,7 @@ name: revisor
 description: Revisa mudanca de codigo procurando defeito, risco e falta de teste, sem alterar arquivo
 models: [deepseek, gemini, openai, claude]
 tools:
-  native: [list_dir, read_file, search, git, memory_read, spec_write]
+  native: [list_dir, read_file, search, git, memory_read, spec_write, knowledge_search]
   mcp: []
 skills: [revisar-mr]
 policy: padrao
