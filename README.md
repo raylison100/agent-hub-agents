@@ -89,3 +89,30 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
 | `OPENAI_API_KEY` | openai |
 | `GEMINI_API_KEY` | gemini |
 | nenhuma | qwen3 (Ollama local) |
+
+## Contexto do projeto no workspace
+
+Cada workspace pode ter uma pasta `.agent-hub/` que o harness le e escreve:
+
+```
+.agent-hub/
+  memory/     um fato por arquivo, com frontmatter e regra de ativacao
+  specs/      especificacao de tarefa, escrita antes de executar
+  decisions/  decisao tomada, com o motivo
+  INSTRUCOES.md   alternativa a .claude/CLAUDE.md e AGENTS.md
+```
+
+As instrucoes do projeto entram sempre no inicio da conversa; o harness usa o
+primeiro arquivo que achar entre `.claude/CLAUDE.md`, `CLAUDE.md`, `AGENTS.md` e
+`.agent-hub/INSTRUCOES.md`. Cada item de memoria entra so quando a regra de
+`activate` casa com o pedido (por `keywords` ou `files`); item sem regra entra
+sempre e por isso custa em toda chamada. O total injetado respeita um teto de
+15% da janela do modelo, e o que ficou de fora aparece na conversa com o motivo.
+
+Os agentes escrevem com `memory_write` e `spec_write`, sempre com run, agente e
+data no cabecalho. Voce ve e apaga tudo pela tela Configuracoes, Contexto do
+projeto. O agendamento `revisao-memoria` audita a memoria todo mes.
+
+Versionar ou nao: `specs/` e `decisions/` sao documentacao do projeto e valem
+commit; `memory/` depende do time. Para deixar tudo fora do git, acrescente
+`.agent-hub/` ao `.gitignore` do seu projeto.

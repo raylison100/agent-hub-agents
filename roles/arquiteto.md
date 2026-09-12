@@ -3,7 +3,7 @@ name: arquiteto
 description: Desenha solucao e decide estrutura antes de codificar, comparando caminhos e apontando o custo de cada um
 models: [claude, openai, gemini]
 tools:
-  native: [list_dir, read_file, search]
+  native: [list_dir, read_file, search, memory_read, spec_write]
   mcp: []
 skills: []
 policy: somente-leitura

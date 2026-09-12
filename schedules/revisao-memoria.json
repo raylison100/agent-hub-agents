@@ -1,0 +1,13 @@
+{
+  "id": "revisao-memoria",
+  "cron": "0 9 1 * *",
+  "timezone": "America/Sao_Paulo",
+  "agent": "qwen3",
+  "workspace": "/home/usuario/Projects/agent-hub",
+  "prompt": "Auditoria mensal da memoria do projeto. Use memory_read sem argumento para listar os itens e depois leia os que precisar. Produza um relatorio em portugues com: 1) quantos itens existem e a data de cada um; 2) itens com mais de 90 dias, que precisam ser conferidos contra o codigo atual; 3) itens sem regra de ativacao, que entram em toda conversa e por isso custam em toda chamada; 4) itens que parecem repetir o mesmo fato; 5) itens que descrevem algo que o codigo ja diz sozinho e portanto nao precisam existir. Nao apague nada e nao grave nada: o relatorio e so leitura, e quem apaga e o usuario pela tela Contexto do projeto.",
+  "mode": "draft",
+  "budget": { "run_usd": 0.01, "day_usd": 0.05 },
+  "overlap": "skip",
+  "missed": "run_once",
+  "enabled": true
+}

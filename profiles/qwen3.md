@@ -7,7 +7,7 @@ reasoning: low
 max_output: 4000
 max_steps: 15
 tools:
-  native: [list_dir, read_file, search]
+  native: [list_dir, read_file, search, memory_read]
   mcp: [jira]
 skills: []
 routing:

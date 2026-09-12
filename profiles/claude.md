@@ -8,7 +8,7 @@ max_output: 32000
 reasoning_budget: 16000
 max_steps: 40
 tools:
-  native: [list_dir, read_file, search, edit_file, write_file, run_command, git]
+  native: [list_dir, read_file, search, edit_file, write_file, run_command, git, memory_read, memory_write, spec_write]
   mcp: [jira]
 skills: [revisar-mr]
 routing:
