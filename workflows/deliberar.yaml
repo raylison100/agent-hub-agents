@@ -1,0 +1,112 @@
+name: deliberar
+description: Especialista, critico e advogado do diabo em modelos diferentes analisam uma proposta e o sintetizador decide; confianca abaixo de 0.7 pergunta a voce antes de valer
+inputs: [proposta]
+mode: draft
+budget_usd: 1.0
+steps:
+  - id: especialista
+    agent: gemini
+    tools: [list_dir, read_file, search]
+    max_steps: 8
+    prompt: |
+      Proposta em analise:
+      {{proposta}}
+
+      Voce e o especialista. Use search para achar os pontos do codigo que a
+      proposta toca, leia no maximo tres arquivos e sustente cada argumento
+      com arquivo e linha. Nada de suposicao sobre codigo que voce nao leu.
+      Voce tem 8 passos: nao varra o repositorio, va direto ao ponto.
+    output_schema:
+      type: object
+      properties:
+        posicao: { type: string, enum: [sim, nao, condicional] }
+        confianca: { type: number }
+        argumentos: { type: array, items: { type: string } }
+        evidencias: { type: array, items: { type: string } }
+      required: [posicao, confianca, argumentos, evidencias]
+
+  - id: critico
+    agent: deepseek
+    tools: [list_dir, read_file, search]
+    max_steps: 8
+    prompt: |
+      Proposta em analise:
+      {{proposta}}
+
+      O especialista disse: posicao {{especialista.posicao}}, confianca
+      {{especialista.confianca}}.
+      Argumentos: {{especialista.argumentos}}
+      Evidencias: {{especialista.evidencias}}
+
+      Voce critica o PROCESSO, nao a pessoa. Aponte onde a analise pulou
+      etapa, generalizou sem evidencia ou ignorou um caso. Confira no codigo
+      as evidencias citadas e diga quais nao se sustentam.
+    output_schema:
+      type: object
+      properties:
+        posicao: { type: string, enum: [sim, nao, condicional] }
+        confianca: { type: number }
+        falhas_no_processo: { type: array, items: { type: string } }
+        evidencias_que_nao_se_sustentam: { type: array, items: { type: string } }
+      required: [posicao, confianca, falhas_no_processo]
+
+  - id: advogado
+    agent: openai
+    tools: [list_dir, read_file, search]
+    max_steps: 6
+    prompt: |
+      Proposta em analise:
+      {{proposta}}
+
+      Especialista: {{especialista.posicao}}, {{especialista.argumentos}}
+      Critico: {{critico.posicao}}, {{critico.falhas_no_processo}}
+
+      Voce e o advogado do diabo. Monte o melhor caso CONTRA a proposta,
+      mesmo que discorde de si mesmo: o que quebra, quem paga a conta, o que
+      fica dificil de desfazer depois.
+    output_schema:
+      type: object
+      properties:
+        caso_contra: { type: array, items: { type: string } }
+        pior_cenario: { type: string }
+        custo_de_desfazer: { type: string }
+        confianca: { type: number }
+      required: [caso_contra, pior_cenario, confianca]
+
+  - id: sintetizar
+    agent: claude
+    tools: [list_dir, read_file, search]
+    max_steps: 6
+    prompt: |
+      Proposta em analise:
+      {{proposta}}
+
+      Especialista: {{especialista.posicao}} ({{especialista.confianca}}),
+      argumentos {{especialista.argumentos}}, evidencias {{especialista.evidencias}}
+      Critico: {{critico.posicao}} ({{critico.confianca}}),
+      falhas {{critico.falhas_no_processo}}
+      Advogado do diabo: caso contra {{advogado.caso_contra}}, pior cenario
+      {{advogado.pior_cenario}}, custo de desfazer {{advogado.custo_de_desfazer}}
+
+      Decida. Sua confianca precisa refletir a divergencia entre os tres e a
+      qualidade da evidencia: onde eles se contradizem sem evidencia, a
+      confianca cai. Nao invente concordancia que nao existe.
+    output_schema:
+      type: object
+      properties:
+        decisao: { type: string }
+        confianca: { type: number }
+        mudancas_na_proposta: { type: array, items: { type: string } }
+        riscos_residuais: { type: array, items: { type: string } }
+        proximos_passos: { type: array, items: { type: string } }
+        criterio_de_reversao: { type: string }
+      required: [decisao, confianca, proximos_passos, criterio_de_reversao]
+
+  - id: conferir
+    gate: "sintetizar.confianca >= 0.7"
+    on_fail: ask
+    question: |
+      Confianca {{sintetizar.confianca}}, abaixo de 0.7.
+      Decisao proposta: {{sintetizar.decisao}}
+      Riscos residuais: {{sintetizar.riscos_residuais}}
+      Autorizo registrar essa decisao mesmo assim?
