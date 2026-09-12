@@ -169,3 +169,18 @@ conexao com a mensagem dizendo o que fazer.
 O daemon publica o cartao em `/.well-known/agent.json`, com um skill por agente,
 e aceita JSON-RPC em `/a2a` com `message/send` e `tasks/get`. A credencial e o
 mesmo token do daemon, no cabecalho `Authorization: Bearer`.
+
+## Acesso remoto com senha
+
+Na propria maquina a conexao e automatica e nao pede nada. De fora, o caminho e
+senha: defina uma em Configuracoes, Conexao, ou pelo terminal, sem deixar rastro
+no historico do shell:
+
+```
+echo -n "sua senha" | agent-hub-daemon senha
+```
+
+O dispositivo de fora entra com a senha uma vez e recebe uma credencial propria,
+que fica guardada nele. Voce ve os dispositivos autorizados com nome e ultimo
+acesso na mesma tela, e revoga um sem mexer nos outros. Tres erros seguidos de
+senha e a origem fica esperando, com a espera crescendo a cada nova tentativa.
