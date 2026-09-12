@@ -15,6 +15,9 @@ profiles/               um Markdown com frontmatter por agente
   openai.md            (usa a Responses API por padrao; `provider_options.api: chat` volta ao chat completions)
   gemini.md
   qwen3.md
+roles/                  papel separado do modelo: prompt, ferramentas e politica
+  revisor.md            roda em deepseek, gemini, openai ou claude
+  arquiteto.md          roda em claude, openai ou gemini
 skills/                 uma pasta por skill, formato Agent Skills
   revisar-mr/SKILL.md
 policies/
