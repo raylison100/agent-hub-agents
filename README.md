@@ -145,3 +145,27 @@ modelos gigantes lendo experts do disco. Ele nao entra sozinho: copie para
 confira o espaco em disco, porque os modelos de ponta passam de 370 GB, e que a
 velocidade fica abaixo de 1 token/s em maquina parecida com a sua, ou seja, so
 faz sentido como camada de lote.
+
+## MCP remoto com OAuth
+
+Servidor MCP por HTTP que pede OAuth ganha um bloco `oauth` no `mcp.json`:
+
+```json
+"meu-servidor": {
+  "url": "https://mcp.exemplo.com/mcp",
+  "oauth": { "issuer": "https://auth.exemplo.com", "scopes": ["read"] }
+}
+```
+
+Com `issuer`, o daemon descobre os endpoints sozinho e, se o provedor aceitar
+registro dinamico, cria o cliente na hora; `authorization_url`, `token_url` e
+`client_id` tambem podem vir escritos a mao. Voce clica em Autorizar na tela de
+Conectores, o navegador abre, e o token volta para o cofre cifrado, com
+renovacao automatica pelo refresh_token. Sem autorizacao, o conector recusa a
+conexao com a mensagem dizendo o que fazer.
+
+## A2A: outro sistema falando com os seus agentes
+
+O daemon publica o cartao em `/.well-known/agent.json`, com um skill por agente,
+e aceita JSON-RPC em `/a2a` com `message/send` e `tasks/get`. A credencial e o
+mesmo token do daemon, no cabecalho `Authorization: Bearer`.
