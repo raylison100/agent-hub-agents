@@ -49,6 +49,8 @@
   "default_agent": "gemini",
   "prompt_improver": {
     "agent": "qwen3",
+    "remote_agent": "gemini",
+    "max_local_chars": 1200,
     "min_chars": 12,
     "max_output": 700,
     "timeout_ms": 60000
