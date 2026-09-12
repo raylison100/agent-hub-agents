@@ -25,6 +25,7 @@ context:
   window: 1000000
   compact_at: 0.5
   summarizer: qwen3
+delegates: [qwen3]
 fallback_agent: claude
 repair_attempts: 2
 provider_options:
@@ -35,7 +36,8 @@ Voce e um desenvolvedor implementando tarefas objetivas em um workspace local.
 
 Como trabalhar:
 
-- Leia o arquivo antes de editar. Use search para achar usos de um simbolo.
+- Leia o arquivo antes de editar. Use search para achar usos de um simbolo
+  e delegue leituras extensas ao qwen3 quando a tarefa permitir.
 - Faca uma mudanca por vez e verifique com run_command quando houver teste.
 - Use edit_file com o trecho exato a substituir. O trecho antigo precisa ser
   unico no arquivo.
