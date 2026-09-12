@@ -129,3 +129,19 @@ Os agentes buscam com `knowledge_search`, que devolve cada trecho com a citacao
 `[arquivo:linha]` pronta, e a descricao da ferramenta cobra a citacao na
 resposta. `.agent-hub/glossario.md` e carregado sempre, para os agentes usarem
 as palavras do time.
+
+## Classe de latencia e o perfil de lote
+
+Cada perfil declara `routing.latency`: `interativo` (voce esperando),
+`lote` (tarefa agendada, sem pressa) ou `ambos`, o padrao. Conversa comum e
+tratada como interativa e exclui quem so serve para lote; run de agendamento,
+gatilho ou workflow entra como lote, e ai o custo pesa mais na pontuacao
+(`batch_cost_weight`, 0.85 contra os 0.5 do interativo), o que empurra o
+trabalho da madrugada para o modelo mais barato.
+
+`exemplos/colibri.md` e um perfil pronto para o Colibri, motor local que roda
+modelos gigantes lendo experts do disco. Ele nao entra sozinho: copie para
+`profiles/` quando tiver o gateway no ar em `127.0.0.1:8080`. Antes disso,
+confira o espaco em disco, porque os modelos de ponta passam de 370 GB, e que a
+velocidade fica abaixo de 1 token/s em maquina parecida com a sua, ou seja, so
+faz sentido como camada de lote.

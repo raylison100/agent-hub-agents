@@ -57,6 +57,7 @@
   },
   "scoring": {
     "cost_weight": 0.5,
+    "batch_cost_weight": 0.85,
     "context_weight": 0.2,
     "expected_output_tokens": 1200,
     "min_capability": 0.4,
