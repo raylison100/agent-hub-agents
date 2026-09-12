@@ -5,6 +5,7 @@ provider: gemini
 model: gemini-3.8-flash
 reasoning: medium
 max_output: 16000
+reasoning_budget: 8000
 max_steps: 30
 tools:
   native: [list_dir, read_file, search, edit_file, write_file, run_command, git]

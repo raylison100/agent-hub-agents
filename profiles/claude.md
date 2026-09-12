@@ -5,6 +5,7 @@ provider: anthropic
 model: claude-opus-5
 reasoning: high
 max_output: 32000
+reasoning_budget: 16000
 max_steps: 40
 tools:
   native: [list_dir, read_file, search, edit_file, write_file, run_command, git]
