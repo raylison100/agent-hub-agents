@@ -27,7 +27,7 @@ policies/
   secrets.json          padroes de segredo para redacao de saida
 pricing.json            precos por milhao de tokens, versionado
 mcp.json                servidores MCP (stdio ou HTTP) e classificacao de risco
-routing.json            intencoes, regras, classificador, melhorador de prompt e pontuacao custo x capacidade
+routing.json            intencoes, regras, classificador, melhorador de prompt, pontuacao custo x capacidade e cascata
 hooks.json              hooks de ciclo de vida no formato proprio
 plugins.json            plugins no layout do Claude Code, por caminho local
 overrides.json          provedor, modelo e contexto para agentes vindos de plugin
@@ -145,6 +145,33 @@ modelos gigantes lendo experts do disco. Ele nao entra sozinho: copie para
 confira o espaco em disco, porque os modelos de ponta passam de 370 GB, e que a
 velocidade fica abaixo de 1 token/s em maquina parecida com a sua, ou seja, so
 faz sentido como camada de lote.
+
+## Cascata: modelo local primeiro, verificacao por codigo
+
+Com `cascade` no `routing.json`, o pedido de uma intencao listada roda antes no
+modelo local. O resultado passa por verificacoes feitas por codigo, sem modelo
+nenhum, e so vai para o agente escolhido pelo roteador quando alguma falha:
+
+```json
+"cascade": { "agent": "qwen3", "escalate_to": "deepseek", "intents": ["explicar"] }
+```
+
+- `parada`: o run precisa terminar normalmente.
+- `resposta`: nao pode vir vazia, com raciocinio vazado nem dizendo que nao achou.
+- `fundamentacao`: precisa ter lido algo do workspace, e so pode citar arquivo que leu.
+- `citacoes`: arquivo citado tem que existir, e a linha tem que caber no arquivo.
+- `ferramentas`: nao pode ter falhado em todas as chamadas.
+
+Vale so com agente automatico, sem papel, sem imagem e com o pedido cabendo no
+`max_prompt_tokens` do perfil local. A tentativa recusada fica guardada como
+mensagem filha do run, fora do historico da conversa.
+
+Vem desligada. Medido em 2026-09-13 com 12 perguntas sobre este codigo, no
+qwen3:8b com contexto de 8k: 3 respostas aceitas no local, uma delas errada
+(leu o arquivo errado e citou certo), 9 escaladas com resposta certa. Custou
+0,019 USD contra 0,035 USD do deepseek sozinho e demorou 216 s contra 177 s.
+Vale ligar com um modelo local maior ou para uma intencao em que o local acerte
+quase sempre.
 
 ## MCP remoto com OAuth
 
