@@ -1,10 +1,12 @@
 # agent-hub-agents
 
-Repositorio de dados: perfis de agente, skills, tabela de precos, servidores
-MCP e politicas de aprovacao. Sem codigo. O daemon le um clone local deste
-repositorio.
+Configuracao do Agent Hub em texto, sem codigo: perfis de agente, papeis,
+skills, workflows, agendamentos, tabela de precos, roteamento e politicas de
+aprovacao e orcamento. O [daemon](https://github.com/raylison100/agent-hub-daemon)
+le uma copia local desta pasta, apontada por `agents_dir` no `config.toml`.
 
-Formato em `../docs/07-agentes.md`, extensoes em `../docs/09-extensoes.md`.
+Use este repositorio como ponto de partida e mantenha a sua copia, com os seus
+perfis e conectores, fora de qualquer repositorio publico.
 
 ## Estrutura
 
@@ -26,7 +28,7 @@ policies/
   budgets.json          teto global mensal e teto diario por agente
   secrets.json          padroes de segredo para redacao de saida
 pricing.json            precos por milhao de tokens, versionado
-mcp.json                servidores MCP (stdio ou HTTP) e classificacao de risco
+mcp.example.json        exemplo de servidor MCP; copie para mcp.json, que fica fora do git
 routing.json            intencoes, regras, classificador, melhorador de prompt, pontuacao custo x capacidade e cascata
 hooks.json              hooks de ciclo de vida no formato proprio
 plugins.json            plugins no layout do Claude Code, por caminho local
@@ -76,9 +78,12 @@ sao traduzidos automaticamente (`PreToolUse`, `PostToolUse`, `Stop`,
   ferramentas.
 - Troque o modelo de `qwen3.md` pelo que sua maquina roda no Ollama.
   O modelo precisa suportar tool calling.
-- `mcp.json` traz um servidor de exemplo apontando para `/tmp`. Substitua
-  pelos seus. Segredos entram por nome de variavel de ambiente com `$`,
-  nunca pelo valor.
+- Copie `mcp.example.json` para `mcp.json` e troque pelos seus servidores, ou
+  cadastre pela tela Conectores. O `mcp.json` e configuracao da sua maquina:
+  lista seus conectores e caminhos locais, e esta no `.gitignore`. Segredos
+  entram por nome de variavel (`${VARIAVEL}`), nunca pelo valor, e o valor fica
+  no cofre cifrado do daemon.
+- Os perfis vem com `mcp: []`. Liste ali os conectores que cada agente pode usar.
 
 ## Variaveis de ambiente esperadas pelo daemon
 
@@ -211,3 +216,29 @@ O dispositivo de fora entra com a senha uma vez e recebe uma credencial propria,
 que fica guardada nele. Voce ve os dispositivos autorizados com nome e ultimo
 acesso na mesma tela, e revoga um sem mexer nos outros. Tres erros seguidos de
 senha e a origem fica esperando, com a espera crescendo a cada nova tentativa.
+
+## Parte do Agent Hub
+
+Este repositorio e uma das partes do [Agent Hub](https://github.com/raylison100/agent-hub),
+um gerenciador de modelos de IA que roda na sua maquina. A documentacao geral
+esta na [wiki](https://github.com/raylison100/agent-hub/wiki).
+
+| Repositorio | Papel |
+|---|---|
+| [agent-hub](https://github.com/raylison100/agent-hub) | ponto de partida, Makefile, scripts e wiki |
+| [agent-hub-core](https://github.com/raylison100/agent-hub-core) | biblioteca TypeScript: adaptadores, laco do agente, custo, roteamento, ferramentas, protocolo |
+| [agent-hub-daemon](https://github.com/raylison100/agent-hub-daemon) | servico local: sessoes, runs, aprovacoes, automacao, conectores, API WebSocket |
+| [agent-hub-web](https://github.com/raylison100/agent-hub-web) | interface Vue 3 como PWA, a mesma no navegador, no celular e no desktop |
+| [agent-hub-agents](https://github.com/raylison100/agent-hub-agents) | perfis, papeis, skills, workflows, precos, roteamento e politicas, em texto |
+| [agent-hub-desktop](https://github.com/raylison100/agent-hub-desktop) | app Tauri 2 para Windows e Linux |
+| [agent-hub-relay](https://github.com/raylison100/agent-hub-relay) | retransmissor sem estado para acesso remoto |
+| [agent-hub-channels](https://github.com/raylison100/agent-hub-channels) | clientes em plataformas de mensagem, hoje Telegram |
+| [agent-hub-docs](https://github.com/raylison100/agent-hub-docs) | planejamento, arquitetura, ADRs e a fonte das paginas da wiki |
+
+## Licenca
+
+[PolyForm Noncommercial 1.0.0](LICENSE). Pode ler, estudar, modificar e usar
+para fins pessoais, de pesquisa, ensino ou em organizacao sem fins lucrativos.
+Uso comercial nao e permitido sem autorizacao do autor.
+
+Required Notice: Copyright (c) 2026 Raylison Nunes (https://github.com/raylison100)

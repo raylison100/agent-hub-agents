@@ -1,0 +1,22 @@
+{
+  "servers": {
+    "exemplo-filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/tmp"
+      ],
+      "env": {},
+      "headers": {},
+      "risk": {
+        "read_*": "read",
+        "list_*": "read",
+        "search_*": "read",
+        "get_*": "read",
+        "*": "write"
+      },
+      "enabled": true
+    }
+  }
+}
